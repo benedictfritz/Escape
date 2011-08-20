@@ -33,21 +33,16 @@ package entities
 	    var rawData:ByteArray = new xml;
 	    var dataString:String = rawData.readUTFBytes(rawData.length);
 
-	    FP.log(dataString);
-	    
 	    var xmlData:XML = new XML(dataString);
 	    
 	    var dataList:XMLList;
 	    var dataElement:XML;
 
-	    dataList = xmlData.OurTiles.rect;
+	    dataList = xmlData.OurTiles.tile;
 	    for each(dataElement in dataList)
 	    {
 		_tiles.setTile(int(dataElement.@x)/16, int(dataElement.@y)/16,
 			       int(dataElement.@tx)/16);
-		FP.console.log("X: " + String(dataElement.@x) +
-			       "Y: " + String(dataElement.@y) +
-			       "Tile: " + String(int(dataElement.@tx)/16));
 	    }
 	}
     }

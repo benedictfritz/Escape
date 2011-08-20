@@ -10,7 +10,7 @@ package worlds
 
     public class WorldOne extends World
     {
-	[Embed(source="ogmo/one.oel", mimeType="application/octet-stream")]
+	[Embed(source="ogmo/test.oel", mimeType="application/octet-stream")]
 	    private static const MAP_ONE:Class;
 	private var _player:Player;
 
@@ -18,9 +18,9 @@ package worlds
 	{
 	    add(new Level(MAP_ONE));
 
-	    Util.addCenteredText("Welcome to the new world!", this, 10);
-	    _player = new Player();
-	    add(_player);
+	    // Util.addCenteredText("Welcome to the new world!", this, 10);
+	    // _player = new Player();
+	    // add(_player);
 	}
     }
 }

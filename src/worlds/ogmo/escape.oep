@@ -1,0 +1,23 @@
+<project>
+  <name> Escape </name>
+
+  <settings>
+    <defaultWidth>640</defaultWidth>
+    <defaultHeight>480</defaultHeight>
+  </settings>
+
+  <tilesets>
+    <tileset name="tiles" image="../../../assets/png/tiles.png" tileHeight="16" tileWidth="16" />
+  </tilesets>
+
+  <objects>
+    <object name="playerStart" image="../../../assets/png/playerStart.png" height="16"width="16" limit="1" />    
+  </objects>
+
+  <layers>
+    <tiles name="OurTiles" gridSize="16" />
+    <objects name="Objects" gridSize="16" />
+  </layers>
+
+
+</project>

@@ -21,14 +21,14 @@ package worlds
 		
 	public function Menu() 
 	{
-	    Util.addCenteredText("meditime", this, 10, 3);
-	    Util.addCenteredText("[space] - start/produce", this, FP.halfHeight);
+	    Util.addCenteredText("Escape", this, 10, 3);
+	    Util.addCenteredText("[space] - start", this, FP.halfHeight);
 	}
 		
 	override public function update():void
 	{
 	    if (Input.pressed(Key.SPACE))
-		FP.world = new TestWorld;
+		FP.world = new WorldOne;
 	}
     }
 }

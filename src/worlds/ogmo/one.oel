@@ -1,0 +1,11 @@
+<level>
+  <width>640</width>
+  <height>480</height>
+  <OurTiles set="tiles">
+    <rect tx="16" ty="0" x="0" y="48" w="640" h="16"/>
+    <rect tx="16" ty="0" x="0" y="416" w="640" h="16"/>
+    <rect tx="0" ty="0" x="0" y="0" w="640" h="48"/>
+    <rect tx="0" ty="0" x="0" y="432" w="640" h="48"/>
+    <rect tx="0" ty="0" x="0" y="64" w="640" h="352"/>
+  </OurTiles>
+</level>

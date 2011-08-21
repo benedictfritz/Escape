@@ -13,12 +13,14 @@ package worlds
 	private static const
 	    ESCAPE_ZONE_WIDTH:Number = 576,
 	    ESCAPE_ZONE_HEIGHT:Number = 448,
-	    ESCAPE_ZONE_PADDING:Number = 16;;
+	    ESCAPE_ZONE_PADDING:Number = 16,
+	    SCORE_INCREMENT:Number = 1234567;
 	
 	[Embed(source="ogmo/escape.oel", mimeType="application/octet-stream")]
 	    private static const ESCAPE:Class;
 	private var 
 	    player:EscapePlayer,
+	    score:Score,
 	    star:Star;
 
 	public function EscapeWorld()
@@ -42,6 +44,14 @@ package worlds
 	    }
 	    add(player);
 
+	    score = new Score();
+	    dataList = levelData.Objects.score;
+	    for each(dataElement in dataList) 
+	    {
+		score.init(int(dataElement.@x), int(dataElement.@y));
+	    }
+	    add(score);	    
+
 	    addStar();
 	}
 
@@ -64,6 +74,11 @@ package worlds
 		+ ESCAPE_ZONE_PADDING;
 	    star.init(startX, startY);
 	    add(star);
+	}
+
+	public function incrementScore():void
+	{
+	    score.incrementScore(SCORE_INCREMENT);
 	}
     }
 }

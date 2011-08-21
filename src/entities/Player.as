@@ -17,7 +17,10 @@ package entities
 	    xSpeed:Number = 200,
 	    ySpeed:Number = 0,
 	    gravity:Number = 1,
-	    jumping:Boolean = false;
+	    jumping:Boolean = false,
+	    frozen:Boolean = false,
+	    frozenTimer:Number = 0;
+	
 
 	public function Player()
 	{
@@ -35,6 +38,28 @@ package entities
 	}
 
 	override public function update():void 
+	{
+	    if (!frozen) {
+		checkKeyPresses();
+	    
+		var spike:Spike = collide("spike", x, y) as Spike;
+		if (spike && !(spike.getCollided())) {
+		    spike.hasCollided();
+		    freezePlayer();
+		    frozen = true;
+		}
+	    }
+	    else {
+		frozenTimer += FP.elapsed;
+		FP.console.log(String(frozenTimer));
+		if (frozenTimer > 3) {
+		    frozen = false;
+		    frozenTimer = 0;
+		}
+	    }
+	}
+
+	private function checkKeyPresses():void
 	{
 	    var moveDistance:Number = xSpeed * FP.elapsed;
 	    
@@ -73,6 +98,11 @@ package entities
 		jumping = true;
 		ySpeed = 0;
 	    }
+	}
+
+	private function freezePlayer():void
+	{
+	    
 	}
     }
 }

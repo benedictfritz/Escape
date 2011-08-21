@@ -138,5 +138,6 @@
   </OurTiles>
   <Objects>
     <playerStart x="624" y="208"/>
+    <score x="16" y="16"/>
   </Objects>
 </level>

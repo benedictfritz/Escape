@@ -54,7 +54,6 @@ package worlds
 	    for each (spike in spikes)
             {
 		if (spike.collide("player", spike.x, spike.y - spike.height)) {
-		    FP.console.log("Boom!");
 		    spike.explode();
 		}
 	    }

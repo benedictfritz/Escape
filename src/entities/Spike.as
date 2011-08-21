@@ -12,7 +12,9 @@ package entities
     {
 	[Embed(source = '../../assets/png/spike.png')]
 	    private const SPIKE:Class;
-	private var exploded:Boolean;
+	private var 
+	    exploded:Boolean = false,
+	    collided:Boolean = false;
 
 	public function Spike()
 	{
@@ -20,7 +22,6 @@ package entities
 	    graphic = img;
 	    setHitbox(img.width, img.height);
 	    type = "spike";
-	    exploded = false;
 	}
 
 	public function init(x:int, y:int):void
@@ -39,6 +40,16 @@ package entities
 		y -= height;
 		exploded = true;
 	    }
+	}
+
+	public function hasCollided():void
+	{
+	    collided = true;
+	}
+
+	public function getCollided():Boolean
+	{
+	    return collided;
 	}
     }
 }

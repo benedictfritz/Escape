@@ -10,9 +10,14 @@ package entities
 
     public class Player extends Entity
     {
-	private static const WIDTH:Number = 20;
-	private static const HEIGHT:Number = 20;
-	private var speed:Number = 200;
+	private static const 
+	    WIDTH:Number = 20,
+	    HEIGHT:Number = 20;
+	private var 
+	    xSpeed:Number = 200,
+	    ySpeed:Number = 0,
+	    gravity:Number = 1,
+	    jumping:Boolean = false;
 
 	public function Player()
 	{
@@ -30,26 +35,42 @@ package entities
 
 	override public function update():void 
 	{
-	    if(collide("level", x, y)) {
-		FP.console.log("collide!");
-	    }
-
+	    var moveDistance:Number = xSpeed * FP.elapsed;
 	    
 	    if (Input.check(Key.D)) {
-		if (x < FP.width - WIDTH)
-		    x += speed * FP.elapsed;
+		x += moveDistance;
+		if(collide("level", x, y)) {
+		    x -= moveDistance;
+		}
 	    }
 	    if (Input.check(Key.A)) {
-		if (x > 0 + WIDTH)
-		    x -= speed * FP.elapsed;
+		x -= moveDistance;
+		if(collide("level", x, y)) {
+		    x += moveDistance;
+		}
 	    }
-	    if (Input.check(Key.W)) {
-		if (y > 0)
-		    y -= speed * FP.elapsed;
+
+	    if (Input.pressed(Key.W)) {
+		if (!jumping) {
+		    jumping = true;
+		    ySpeed = 10;
+		}
 	    }
-	    if (Input.check(Key.S)) {
-		if (y < FP.height - HEIGHT)
-		    y += speed * FP.elapsed;
+
+	    if (jumping) {
+		y -= ySpeed;
+		ySpeed -= gravity;
+		if (collide("level", x, y)) {
+		    jumping = false;
+		    while(collide("level", x, y)) {
+			y -= 1;
+		    }
+		}
+	    }
+	    // walking off edges case
+	    else if (!collide("level", x, y+1)) {
+		jumping = true;
+		ySpeed = 0;
 	    }
 	}
     }

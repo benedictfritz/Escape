@@ -42,7 +42,6 @@ package entities
 	{
 	    var rawData:ByteArray = new xml;
 	    var dataString:String = rawData.readUTFBytes(rawData.length);
-	    FP.console.log(dataString);
 
 	    levelData = new XML(dataString);
 	    

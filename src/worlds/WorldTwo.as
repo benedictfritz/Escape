@@ -8,19 +8,19 @@ package worlds
     import util.Util;
     import entities.*;
 
-    public class WorldOne extends World
+    public class WorldTwo extends World
     {
-	[Embed(source="ogmo/one.oel", mimeType="application/octet-stream")]
-	    private static const MAP_ONE:Class;
+	[Embed(source="ogmo/two.oel", mimeType="application/octet-stream")]
+	    private static const MAP_TWO:Class;
 	private var player:Player;
 
-	public function WorldOne()
+	public function WorldTwo()
 	{
 	}
 
 	override public function begin():void
 	{
-	    var level:Level = new Level(MAP_ONE);
+	    var level:Level = new Level(MAP_TWO);
 	    add(level);
 
 	    player = new Player();
@@ -34,16 +34,6 @@ package worlds
 		player.init(int(dataElement.@x), int(dataElement.@y));
 	    }
 	    add(player);
-	}
-
-	override public function update():void
-	{
-	    if (player) {
-		if (player.x > FP.width) {
-		    FP.world = new WorldTwo();
-		}
-	    }
-	    super.update();
 	}
     }
 }

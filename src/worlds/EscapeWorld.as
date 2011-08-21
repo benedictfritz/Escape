@@ -10,9 +10,16 @@ package worlds
 
     public class EscapeWorld extends World
     {
+	private static const
+	    ESCAPE_ZONE_WIDTH:Number = 576,
+	    ESCAPE_ZONE_HEIGHT:Number = 448,
+	    ESCAPE_ZONE_PADDING:Number = 16;;
+	
 	[Embed(source="ogmo/escape.oel", mimeType="application/octet-stream")]
 	    private static const ESCAPE:Class;
-	private var player:EscapePlayer;
+	private var 
+	    player:EscapePlayer,
+	    star:Star;
 
 	public function EscapeWorld()
 	{
@@ -34,7 +41,10 @@ package worlds
 		player.init(int(dataElement.@x), int(dataElement.@y));
 	    }
 	    add(player);
+
+	    addStar();
 	}
+
 	override public function update():void
 	{
 	    if (player) {
@@ -44,6 +54,16 @@ package worlds
 	    }
 	    super.update();
 	}
-
+	
+	public function addStar():void
+	{
+	    star = new Star();
+	    var startX:Number = FP.rand(ESCAPE_ZONE_WIDTH - star.width) 
+		+ ESCAPE_ZONE_PADDING;
+	    var startY:Number = FP.rand(ESCAPE_ZONE_HEIGHT - star.height)
+		+ ESCAPE_ZONE_PADDING;
+	    star.init(startX, startY);
+	    add(star);
+	}
     }
 }

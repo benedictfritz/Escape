@@ -11,7 +11,8 @@
   </tilesets>
 
   <objects>
-    <object name="playerStart" image="../../../assets/png/playerStart.png" height="16"width="16" limit="1" />    
+    <object name="playerStart" image="../../../assets/png/playerStart.png" height="16"width="16" limit="1" />
+    <object name="spike" image="../../../assets/png/spike.png" height="48" width="16" />
   </objects>
 
   <layers>

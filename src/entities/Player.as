@@ -25,6 +25,7 @@ package entities
 	    graphic = img;
 	    setHitbox(img.width, img.height);
 	    type = "player";
+	    layer = 2;
 	}
 
 	public function init(x:int, y:int):void

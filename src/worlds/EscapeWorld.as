@@ -8,22 +8,22 @@ package worlds
     import util.Util;
     import entities.*;
 
-    public class WorldTwo extends World
+    public class EscapeWorld extends World
     {
-	[Embed(source="ogmo/two.oel", mimeType="application/octet-stream")]
-	    private static const MAP_TWO:Class;
-	private var player:Player;
+	[Embed(source="ogmo/escape.oel", mimeType="application/octet-stream")]
+	    private static const ESCAPE:Class;
+	private var player:EscapePlayer;
 
-	public function WorldTwo()
+	public function EscapeWorld()
 	{
 	}
 
 	override public function begin():void
 	{
-	    var level:Level = new Level(MAP_TWO);
+	    var level:Level = new Level(ESCAPE);
 	    add(level);
 
-	    player = new Player();
+	    player = new EscapePlayer();
 	    var levelData:XML;
 	    var dataList:XMLList;
 	    var dataElement:XML;
@@ -39,13 +39,11 @@ package worlds
 	{
 	    if (player) {
 		if (player.x > FP.width) {
-		    FP.world = new WorldTwo();
-		}
-		else if (player.x < 0) {
-		    FP.world = new EscapeWorld();
+		    FP.world = new WorldOne();
 		}
 	    }
 	    super.update();
 	}
+
     }
 }

@@ -9,20 +9,30 @@ package entities
     
     public class Level extends Entity
     {
-	private var _tiles:Tilemap;
-	private var _grid:Grid;
-
+	private var 
+	    tiles:Tilemap,
+	    grid:Grid,
+	    levelData:XML;
+	
+	private static const
+	    WORLD_WIDTH:Number = FP.width,
+	    WORLD_HEIGHT:Number = FP.height,
+	    TILE_WIDTH:Number = 16,
+	    TILE_HEIGHT:Number = 16;;
+	
 	[Embed(source="../../assets/png/tiles.png")]
-	    private const SPRITE_TILESET:Class;
+	    private const SPRITETILESET:Class;
 
 	public function Level(xml:Class)
 	{
-	    _tiles = new Tilemap(SPRITE_TILESET, 640, 480, 16, 16);
-	    graphic = _tiles;
+	    tiles = new Tilemap(SPRITETILESET, WORLD_WIDTH, WORLD_HEIGHT, 
+				 TILE_WIDTH, TILE_HEIGHT);
+	    graphic = tiles;
 	    layer = 1;
 
-	    _grid = new Grid(640, 480, 16, 16, 0, 0);
-	    mask = _grid;
+	    grid = new Grid(WORLD_WIDTH, WORLD_HEIGHT, 
+			     TILE_WIDTH, TILE_HEIGHT, 0, 0);
+	    mask = grid;
 
 	    type = "level";
 	    loadLevel(xml);
@@ -32,18 +42,28 @@ package entities
 	{
 	    var rawData:ByteArray = new xml;
 	    var dataString:String = rawData.readUTFBytes(rawData.length);
+	    FP.console.log(dataString);
 
-	    var xmlData:XML = new XML(dataString);
+	    levelData = new XML(dataString);
 	    
 	    var dataList:XMLList;
 	    var dataElement:XML;
 
-	    dataList = xmlData.OurTiles.tile;
+	    dataList = levelData.OurTiles.tile;
 	    for each(dataElement in dataList)
 	    {
-		_tiles.setTile(int(dataElement.@x)/16, int(dataElement.@y)/16,
-			       int(dataElement.@tx)/16);
+		tiles.setTile(int(dataElement.@x)/TILE_WIDTH,
+			       int(dataElement.@y)/TILE_HEIGHT,
+			       int(dataElement.@tx)/TILE_WIDTH);
+		grid.setTile(int(dataElement.@x)/TILE_WIDTH,
+			      int(dataElement.@y)/TILE_HEIGHT,
+			      int(dataElement.@tx)/TILE_WIDTH == 1);
 	    }
+	}
+
+	public function getLevelData():XML
+	{
+	    return levelData;
 	}
     }
 }

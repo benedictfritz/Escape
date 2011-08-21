@@ -12,15 +12,31 @@ package worlds
     {
 	[Embed(source="ogmo/one.oel", mimeType="application/octet-stream")]
 	    private static const MAP_ONE:Class;
-	private var _player:Player;
+	private var player:Player;
 
 	public function WorldOne()
 	{
-	    add(new Level(MAP_ONE));
+	}
 
+	override public function begin():void
+	{
 	    Util.addCenteredText("Welcome to the new world!", this, 10);
-	    _player = new Player();
-	    add(_player);
+
+	    var level:Level = new Level(MAP_ONE);
+	    add(level);
+
+	    player = new Player();
+
+	    var levelData:XML;
+	    var dataList:XMLList;
+	    var dataElement:XML;
+	    levelData = level.getLevelData();
+	    dataList = levelData.Objects.playerStart;
+	    for each(dataElement in dataList) 
+	    {
+		player.init(dataElement.@x, dataElement.@y);
+	    }
+	    add(player);
 	}
     }
 }

@@ -16,7 +16,7 @@ package entities
 
 	public function Player()
 	{
-	    var img:Image = new Image(new BitmapData(WIDTH, HEIGHT, false, 0xFFFFFF));
+	    var img:Image = Image.createCircle(8, 0xFFFFFF);
 	    graphic = img;
 	    setHitbox(img.width, img.height);
 	    type = "player";
@@ -30,26 +30,27 @@ package entities
 
 	override public function update():void 
 	{
-	    if (Input.check(Key.D))
-		{
-		    if (x < FP.width - WIDTH)
-			x += speed * FP.elapsed;
-		}
-	    if (Input.check(Key.A))
-		{
-		    if (x > 0 + WIDTH)
-			x -= speed * FP.elapsed;
-		}
-	    if (Input.check(Key.W))
-		{
-		    if (y > 0)
-			y -= speed * FP.elapsed;
-		}
-	    if (Input.check(Key.S))
-		{
-		    if (y < FP.height - HEIGHT)
-			y += speed * FP.elapsed;
-		}
+	    if(collide("level", x, y)) {
+		FP.console.log("collide!");
+	    }
+
+	    
+	    if (Input.check(Key.D)) {
+		if (x < FP.width - WIDTH)
+		    x += speed * FP.elapsed;
+	    }
+	    if (Input.check(Key.A)) {
+		if (x > 0 + WIDTH)
+		    x -= speed * FP.elapsed;
+	    }
+	    if (Input.check(Key.W)) {
+		if (y > 0)
+		    y -= speed * FP.elapsed;
+	    }
+	    if (Input.check(Key.S)) {
+		if (y < FP.height - HEIGHT)
+		    y += speed * FP.elapsed;
+	    }
 	}
     }
 }

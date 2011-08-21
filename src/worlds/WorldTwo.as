@@ -8,11 +8,13 @@ package worlds
     import util.Util;
     import entities.*;
 
-    public class WorldTwo extends World
+    public class WorldTwo extends RealWorld
     {
 	[Embed(source="ogmo/two.oel", mimeType="application/octet-stream")]
 	    private static const MAP_TWO:Class;
-	private var player:Player;
+	private var 
+	    player:Player,
+	    spikes:Array;
 
 	public function WorldTwo()
 	{
@@ -20,6 +22,7 @@ package worlds
 
 	override public function begin():void
 	{
+	    super.begin();
 	    var level:Level = new Level(MAP_TWO);
 	    add(level);
 
@@ -34,14 +37,32 @@ package worlds
 		player.init(int(dataElement.@x), int(dataElement.@y));
 	    }
 	    add(player);
+
+	    spikes = new Array();
+	    dataList = levelData.Objects.spike;
+	    for each(dataElement in dataList)
+	    {
+		var spike:Spike = new Spike();
+		spike.init(int(dataElement.@x), int(dataElement.@y));
+		add(spike);
+		spikes.push(spike);
+	    }
 	}
 	override public function update():void
 	{
+	    var spike:Spike;
+	    for each (spike in spikes)
+            {
+		if (spike.collide("player", spike.x, spike.y - spike.height)) {
+		    spike.explode();
+		}
+	    }
 	    if (player) {
 		if (player.x > FP.width) {
 		    FP.world = new WorldTwo();
 		}
 		else if (player.x < 0) {
+		    super.stopMusic();
 		    FP.world = new EscapeWorld();
 		}
 	    }

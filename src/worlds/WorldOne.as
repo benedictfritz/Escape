@@ -8,9 +8,9 @@ package worlds
     import util.Util;
     import entities.*;
 
-    public class WorldOne extends World
+    public class WorldOne extends RealWorld
     {
-	[Embed(source="ogmo/oneNew.oel", mimeType="application/octet-stream")]
+	[Embed(source="ogmo/one.oel", mimeType="application/octet-stream")]
 	    private static const MAP_ONE:Class;
 	private var 
 	    player:Player,
@@ -22,6 +22,7 @@ package worlds
 
 	override public function begin():void
 	{
+	    super.begin();
 	    var level:Level = new Level(MAP_ONE);
 	    add(level);
 
@@ -59,9 +60,11 @@ package worlds
 	    }
 	    if (player) {
 		if (player.x > FP.width) {
+		    super.stopMusic();
 		    FP.world = new WorldTwo();
 		}
 		else if (player.x < 0) {
+		    super.stopMusic();
 		    FP.world = new EscapeWorld();
 		}
 	    }

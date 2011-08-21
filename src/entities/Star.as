@@ -34,6 +34,8 @@ package entities
 	{
 	    if (collide("escapePlayer", x, y)) {
 		EscapeWorld(this.world).addStar();
+		EscapeWorld(this.world).removeCompliment();
+		EscapeWorld(this.world).addCompliment();
 		EscapeWorld(this.world).incrementScore();
 		this.world.recycle(this);
 	    }

@@ -10,7 +10,7 @@ package util
     {
 	// Adds a piece of text to the world at the horizontal center of the screen
 	public static function addCenteredText(string:String, world:World, 
-					       y:Number=0, scale:Number=1):void
+					       y:Number=0, scale:Number=1):Entity
 	{
 	    var text:Text;
 	    text = new Text(string);
@@ -19,6 +19,7 @@ package util
 	    var textEntity:Entity;
 	    textEntity = new Entity(FP.halfWidth - scale*(text.width/2), y, text);
 	    world.add(textEntity);
+	    return textEntity;
 	}
     }
 }

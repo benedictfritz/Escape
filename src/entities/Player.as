@@ -6,7 +6,10 @@ package entities
     import net.flashpunk.Entity;
     import net.flashpunk.utils.Key;
     import net.flashpunk.utils.Input;
+    import net.flashpunk.graphics.Text;
     import net.flashpunk.graphics.Image;
+
+    import worlds.*;
 
     public class Player extends Entity
     {
@@ -19,8 +22,11 @@ package entities
 	    gravity:Number = 1,
 	    jumping:Boolean = false,
 	    frozen:Boolean = false,
-	    frozenTimer:Number = 0;
-	
+	    frozenTimer:Number = 0,
+	    speech:Text,
+	    speechArray:Array,
+	    speechArrayIndex:Number = 0;
+
 
 	public function Player()
 	{
@@ -29,6 +35,7 @@ package entities
 	    setHitbox(img.width, img.height);
 	    type = "player";
 	    layer = 2;
+	    initSpeechArray();
 	}
 
 	public function init(x:int, y:int):void
@@ -45,7 +52,7 @@ package entities
 		var spike:Spike = collide("spike", x, y) as Spike;
 		if (spike && !(spike.getCollided())) {
 		    spike.hasCollided();
-		    freezePlayer();
+		    addSpeech();
 		    frozen = true;
 		}
 	    }
@@ -54,6 +61,7 @@ package entities
 		FP.console.log(String(frozenTimer));
 		if (frozenTimer > 3) {
 		    frozen = false;
+		    speech.visible = false;
 		    frozenTimer = 0;
 		}
 	    }
@@ -100,9 +108,34 @@ package entities
 	    }
 	}
 
-	private function freezePlayer():void
+	private function addSpeech():void
 	{
-	    
+	    speech = new Text(speechArray[speechArrayIndex], x - 32, y - 64);
+	    speech.color = 0xFFFFFF;
+	    world.addGraphic(speech);
+	    speechArrayIndex++;
+	}
+
+	private function initSpeechArray():void
+	{
+	    if (FP.world is WorldOne) {
+		speechArray = new Array(
+					"What is this?",
+					"This isn't fun",
+					"I should just go back",
+					"I just want to escape",
+					"This isn't even a game"
+					);
+	    }
+	    else if (FP.world is WorldTwo) {
+	    	speechArray = new Array(
+	    				"Blabla",
+	    				"Blabla",
+	    				"Blabla",
+	    				"Blabla",
+	    				"Blabla"
+	    				);
+	    }
 	}
     }
 }

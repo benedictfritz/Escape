@@ -15,8 +15,8 @@ package entities
 	{
 	    score = 0;
 
-	    Text.size = 32;
-	    text = new Text("Score: " + score);
+	    text = new Text("Score: " + score + "!!!!");
+	    text.size = 32;
 	    text.color = 0xFFFFFF;
 	    graphic = text;
 	    score = 0;
@@ -35,8 +35,8 @@ package entities
 
 	override public function update():void
 	{
-	    Text.size = 32;
-	    text = new Text("Score: " + score);
+	    text = new Text("Score: " + score + "!!!!");
+	    text.size = 32;
 	    text.color = 0xFFFFFF;
 	    graphic = text;
 	}

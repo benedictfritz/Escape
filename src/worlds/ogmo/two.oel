@@ -463,5 +463,10 @@
   </OurTiles>
   <Objects>
     <playerStart x="0" y="400"/>
+    <spike x="80" y="368"/>
+    <spike x="320" y="272"/>
+    <spike x="368" y="224"/>
+    <spike x="416" y="224"/>
+    <spike x="544" y="128"/>
   </Objects>
 </level>

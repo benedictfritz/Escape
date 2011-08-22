@@ -331,5 +331,6 @@
     <spike x="384" y="416"/>
     <spike x="480" y="416"/>
     <playerStart x="0" y="400"/>
+    <escapeSign x="16" y="352"/>
   </Objects>
 </level>

@@ -29,7 +29,8 @@ package worlds
 	    star:Star,
 	    compliment:Text,
 	    complimentArray:Array,
-	    music:Sfx;
+	    music:Sfx,
+	    starBurst:StarBurst;
 
 	public function EscapeWorld()
 	{
@@ -100,12 +101,6 @@ package worlds
 	    var randCompliment:String = 
 		String(complimentArray[int(FP.rand(complimentArray.length))]);
 	    compliment = new Text(randCompliment);
-	    // var complimentX:Number = 
-	    // 	FP.rand(ESCAPE_ZONE_WIDTH - compliment.width) 
-	    // 	+ ESCAPE_ZONE_PADDING;
-	    // var complimentY:Number = 
-	    // 	FP.rand(ESCAPE_ZONE_HEIGHT - compliment.height) 
-	    // 	+ ESCAPE_ZONE_PADDING;
 
 	    var complimentX:Number = FP.halfWidth - 
 		COMPLIMENT_SCALE*(compliment.width/2);
@@ -113,8 +108,14 @@ package worlds
 	    compliment = new Text(randCompliment, complimentX, complimentY);
 	    compliment.scale = COMPLIMENT_SCALE;
 	    compliment.visible = true;
-	    // compliment = new Text(randCompliment, complimentX, complimentY);
 	    this.addGraphic(compliment);
+	}
+
+	public function addStarBurst(x:int, y:int):void
+	{
+	    starBurst = new StarBurst();
+	    starBurst.init(x, y);
+	    add(starBurst);
 	}
 
 	public function incrementScore():void

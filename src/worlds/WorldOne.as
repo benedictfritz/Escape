@@ -47,6 +47,16 @@ package worlds
 		add(spike);
 		spikes.push(spike);
 	    }
+
+	    dataList = levelData.Objects.escapeSign;
+	    for each(dataElement in dataList)
+	    {
+		var escapeSign:Text = new Text("<- Escape", 
+						 int(dataElement.@x),
+						 int(dataElement.@y));
+		escapeSign.color = 0xee6490;
+		addGraphic(escapeSign);
+	    }
 	}
 
 	override public function update():void
@@ -60,7 +70,6 @@ package worlds
 	    }
 	    if (player) {
 		if (player.x > FP.width) {
-		    super.stopMusic();
 		    FP.world = new WorldTwo();
 		}
 		else if (player.x < 0) {

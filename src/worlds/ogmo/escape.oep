@@ -14,6 +14,7 @@
     <object name="playerStart" image="../../../assets/png/playerStart.png" height="16"width="16" limit="1" />
     <object name="spike" image="../../../assets/png/spike.png" height="48" width="16" />
     <object name="score" image="../../../assets/png/scoremarker.png" height="16" width="16" limit="1" />
+    <object name="escapeSign" image="../../../assets/png/escapemarker.png" height="16" width="16" limit="1" />
   </objects>
 
   <layers>

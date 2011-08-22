@@ -11,7 +11,6 @@ package
 	    public function Main()
 	    {
 		super(640, 480, 60);
-		FP.console.enable();
 		FP.world = new Menu;
 	    }
 	}

@@ -22,7 +22,6 @@ package worlds
 
 	override public function begin():void
 	{
-	    super.begin();
 	    var level:Level = new Level(MAP_TWO);
 	    add(level);
 
@@ -47,6 +46,16 @@ package worlds
 		add(spike);
 		spikes.push(spike);
 	    }
+
+	    dataList = levelData.Objects.escapeSign;
+	    for each(dataElement in dataList)
+	    {
+		var escapeSign:Text = new Text("<- Escape", 
+						 int(dataElement.@x),
+						 int(dataElement.@y));
+		escapeSign.color = 0xee6490;
+		addGraphic(escapeSign);
+	    }
 	}
 	override public function update():void
 	{
@@ -59,7 +68,7 @@ package worlds
 	    }
 	    if (player) {
 		if (player.x > FP.width) {
-		    FP.world = new WorldTwo();
+		    FP.world = new End();
 		}
 		else if (player.x < 0) {
 		    super.stopMusic();

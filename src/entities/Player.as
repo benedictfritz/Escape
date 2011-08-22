@@ -3,6 +3,7 @@ package entities
     import flash.display.BitmapData;
 
     import net.flashpunk.FP;
+    import net.flashpunk.Sfx;
     import net.flashpunk.Entity;
     import net.flashpunk.utils.Key;
     import net.flashpunk.utils.Input;
@@ -13,6 +14,9 @@ package entities
 
     public class Player extends Entity
     {
+	[Embed(source = '../../assets/mp3/SpikeCollision.mp3')]
+	    private const SPIKECOLLISION:Class;
+
 	private static const 
 	    WIDTH:Number = 20,
 	    HEIGHT:Number = 20;
@@ -25,7 +29,8 @@ package entities
 	    frozenTimer:Number = 0,
 	    speech:Text,
 	    speechArray:Array,
-	    speechArrayIndex:Number = 0;
+	    speechArrayIndex:Number = 0,
+	    spikeCollision:Sfx = new Sfx(SPIKECOLLISION);
 
 
 	public function Player()
@@ -53,12 +58,13 @@ package entities
 		if (spike && !(spike.getCollided())) {
 		    spike.hasCollided();
 		    addSpeech();
+		    spikeCollision.play();
+		    RealWorld(FP.world).addBloodSpurt(x, y);
 		    frozen = true;
 		}
 	    }
 	    else {
 		frozenTimer += FP.elapsed;
-		FP.console.log(String(frozenTimer));
 		if (frozenTimer > 3) {
 		    frozen = false;
 		    speech.visible = false;
@@ -123,18 +129,15 @@ package entities
 					"What is this?",
 					"This isn't fun",
 					"I should just go back",
-					"I just want to escape",
-					"This isn't even a game"
-					);
+					"I just want to escape");
 	    }
 	    else if (FP.world is WorldTwo) {
 	    	speechArray = new Array(
-	    				"Blabla",
-	    				"Blabla",
-	    				"Blabla",
-	    				"Blabla",
-	    				"Blabla"
-	    				);
+	    				"",
+	    				"",
+	    				"",
+	    				"",
+	    				"");
 	    }
 	}
     }
